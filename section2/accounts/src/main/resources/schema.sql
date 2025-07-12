@@ -1,3 +1,5 @@
+-- This file is not processed by spring
+
 CREATE TABLE IF NOT EXISTS `customer` (
   `customer_id` int AUTO_INCREMENT  PRIMARY KEY,
   `name` varchar(100) NOT NULL,
