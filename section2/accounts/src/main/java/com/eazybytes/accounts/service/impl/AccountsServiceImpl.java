@@ -73,6 +73,27 @@ public class AccountsServiceImpl  implements IAccountsService {
         return customerDto;
     }
 
+    @Override
+    public CustomerDto fetchCustomer(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
+        return customerDto;
+    }
+
+    @Override
+    public AccountsDto fetchAccountDetails(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+                () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
+        );
+        AccountsDto accountsDto = AccountsMapper.mapToAccountsDto(accounts, new AccountsDto());
+        return accountsDto;
+    }
+
     /**
      * @param customerDto - CustomerDto Object
      * @return boolean indicating if the update of Account details is successful or not

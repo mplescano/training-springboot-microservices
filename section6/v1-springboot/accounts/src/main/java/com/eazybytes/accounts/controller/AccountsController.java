@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -38,18 +37,19 @@ public class AccountsController {
 
     private final IAccountsService iAccountsService;
 
-    public AccountsController(IAccountsService iAccountsService) {
+    private final String buildVersion;
+
+    private final Environment environment;
+
+    private final AccountsContactInfoDto accountsContactInfoDto;
+
+    public AccountsController(IAccountsService iAccountsService, @Value("${build.version}") String buildVersion,
+                              Environment environment, AccountsContactInfoDto accountsContactInfoDto) {
         this.iAccountsService = iAccountsService;
+        this.buildVersion = buildVersion;
+        this.environment = environment;
+        this.accountsContactInfoDto = accountsContactInfoDto;
     }
-
-    @Value("${build.version}")
-    private String buildVersion;
-
-    @Autowired
-    private Environment environment;
-
-    @Autowired
-    private AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary = "Create Account REST API",

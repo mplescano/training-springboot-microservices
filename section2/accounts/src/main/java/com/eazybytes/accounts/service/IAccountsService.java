@@ -1,5 +1,6 @@
 package com.eazybytes.accounts.service;
 
+import com.eazybytes.accounts.dto.AccountsDto;
 import com.eazybytes.accounts.dto.CustomerDto;
 
 public interface IAccountsService {
@@ -16,6 +17,10 @@ public interface IAccountsService {
      * @return Accounts Details based on a given mobileNumber
      */
     CustomerDto fetchAccount(String mobileNumber);
+
+    CustomerDto fetchCustomer(String mobileNumber);
+
+    AccountsDto fetchAccountDetails(String mobileNumber);
 
     /**
      *

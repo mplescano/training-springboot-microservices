@@ -18,12 +18,12 @@ spring:
     import:
       - "application_qa.yml"
       - "application_prod.yml"
-  profiles:
-    active:
-      - "qa"
+#  profiles:
+#    active:
+#      - "qa"
 
 build:
-  version: "3.0"
+  version: "2.0.dev"
 
 cards:
   message: "Welcome to EazyBank cards related local APIs "

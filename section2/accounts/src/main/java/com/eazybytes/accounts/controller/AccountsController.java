@@ -1,6 +1,7 @@
 package com.eazybytes.accounts.controller;
 
 import com.eazybytes.accounts.constants.AccountsConstants;
+import com.eazybytes.accounts.dto.AccountsDto;
 import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.dto.ErrorResponseDto;
 import com.eazybytes.accounts.dto.ResponseDto;
@@ -86,6 +87,22 @@ public class AccountsController {
                                                                String mobileNumber) {
         CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(customerDto);
+    }
+
+    @GetMapping("/customer/{mobileNumber}")
+    public ResponseEntity<CustomerDto> fetchCustomerDetails(@PathVariable("mobileNumber")
+                                                           @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                           String mobileNumber) {
+        CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(customerDto);
+    }
+
+    @GetMapping("/customer/{mobileNumber}/account")
+    public ResponseEntity<AccountsDto> fetchAccountDetails2(@PathVariable("mobileNumber")
+                                                            @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                            String mobileNumber) {
+        AccountsDto accountsDto = iAccountsService.fetchAccountDetails(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(accountsDto);
     }
 
     @Operation(
